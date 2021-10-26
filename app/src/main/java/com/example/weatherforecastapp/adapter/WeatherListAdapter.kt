@@ -1,0 +1,57 @@
+package com.example.weatherforecastapp.adapter
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherforecastapp.R
+import com.example.weatherforecastapp.entity.WeatherObject
+import com.example.weatherforecastapp.views.MainActivity
+
+class WeatherListAdapter: RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() {
+
+    private var weatherListAdapter = emptyList<WeatherObject>()
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var timeTextView: TextView? = null
+        var descTextView: TextView? = null
+        var tempTextView: TextView? = null
+        var weatherImageView: ImageView? = null
+
+        init {
+            timeTextView = itemView.findViewById(R.id.timeTextView)
+            descTextView = itemView.findViewById(R.id.mainTextView)
+            tempTextView = itemView.findViewById(R.id.tempTextView)
+            weatherImageView = itemView.findViewById(R.id.iconImageView)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.list_element,parent,false)
+        )
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val  currentItem = weatherListAdapter[position]
+        holder.timeTextView?.text = currentItem.date.toString()
+        holder.descTextView?.text = currentItem.desc
+        holder.tempTextView?.text = currentItem.temp.toString()+"\u2103"
+        holder.weatherImageView?.setImageResource(R.drawable.ic_light_mode_black_24dp)
+
+    }
+
+    override fun getItemCount(): Int {
+        return weatherListAdapter.size
+    }
+
+    fun setData(notes: List<WeatherObject>) {
+        this.weatherListAdapter = notes
+        notifyDataSetChanged()
+    }
+
+
+}
