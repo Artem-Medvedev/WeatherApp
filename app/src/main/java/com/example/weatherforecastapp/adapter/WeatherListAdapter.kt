@@ -37,9 +37,9 @@ class WeatherListAdapter: RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val  currentItem = weatherListAdapter[position]
-        holder.timeTextView?.text = currentItem.date.toString()
+        holder.timeTextView?.text = currentItem.date
         holder.descTextView?.text = currentItem.desc
-        holder.tempTextView?.text = currentItem.temp.toString()+"\u2103"
+        holder.tempTextView?.text = currentItem.temp.toInt().toString()+"\u2103"
         holder.weatherImageView?.setImageResource(R.drawable.ic_light_mode_black_24dp)
 
     }
