@@ -71,6 +71,24 @@ class TodayFragment:Fragment() {
                             if(t[0].desc=="Rain"||t[0].desc=="Thunderstorm"){
                                 binding.imageView.load(R.drawable.raining)
                             }
+
+                            val yourResults="""Today's weather is:
+                  ${binding.cityNameTextView.text}
+                   Temperature: ${binding.mainTempTextView.text}
+                   Wind speed: ${binding.speedTextView.text}
+                   Pressure:${binding.pressureTextView.text}
+                   Humidity${binding.humidityTextView.text}
+                    """.trimMargin()
+                            binding.imageButton.load(R.drawable.ic_share_black_24dp)
+                            binding.imageButton.setOnClickListener {
+                                val sendIntent = Intent().apply {
+                                    action = Intent.ACTION_SEND
+                                    type = "plain/text"
+                                    putExtra(Intent.EXTRA_SUBJECT,"Your Weather")
+                                    putExtra(Intent.EXTRA_TEXT, yourResults)
+                                }
+                                startActivity(sendIntent)
+                            }
                         }
 
                         override fun onError(e: Throwable) {
@@ -85,69 +103,9 @@ class TodayFragment:Fragment() {
         } else{
             ActivityCompat.requestPermissions(activity as MainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),44)
         }
-
-
-        val yourResults="""Today's weather is:
-            binding.cityNameTextView.text+
-            Temperature: ${binding.mainTempTextView.text}
-            Wind speed: ${binding.speedTextView.text}
-            Pressure:${binding.pressureTextView.text}
-            Humidity${binding.humidityTextView.text}
-             """.trimMargin()
-        binding.imageButton.load(R.drawable.ic_share_black_24dp)
-        binding.imageButton.setOnClickListener {
-            val sendIntent = Intent().apply {
-                action = Intent.ACTION_SEND
-                type = "plain/text"
-                putExtra(Intent.EXTRA_SUBJECT,"Your Weather")
-                putExtra(Intent.EXTRA_TEXT, yourResults)
-            }
-            startActivity(sendIntent)
-        }
-
         return root
 
     }
 
-   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        val api = WeatherApiImpl
-        if(ActivityCompat.checkSelfPermission((activity as MainActivity)
-                , Manifest.permission.ACCESS_FINE_LOCATION
-            )== PackageManager.PERMISSION_GRANTED){
-            val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity as MainActivity)
-            var city: List<Address>
-
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
-                val geoCoder = Geocoder(activity as MainActivity, Locale.ENGLISH)
-                city = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-                currentLoc = city.first().locality
-                Log.d("First",city.first().locality)
-                api.getListOfWeather(currentLoc)
-                    .subscribe(object : Observer<List<WeatherObject>> {
-                        override fun onSubscribe(d: Disposable) {
-                        }
-
-                        override fun onNext(t: List<WeatherObject>) {
-                            binding.cityNameTextView.text = currentLoc + t[0].desc
-                            binding.mainTempTextView.text = t[0].temp.toInt().toString() + "\u2103"
-                            binding.humidityTextView.text = t[0].humidity.toString()
-                            binding.speedTextView.text = t[0].speed.toString()
-                            binding.pressureTextView.text = t[0].pressure.toString()
-                        }
-
-                        override fun onError(e: Throwable) {
-                            Log.e(ContentValues.TAG,"onError: ",e)
-                        }
-
-                        override fun onComplete() {
-                        }
-                    })
-            }
-
-        } else{
-            ActivityCompat.requestPermissions(activity as MainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),44)
-        }
-    }*/
 }
