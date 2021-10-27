@@ -1,11 +1,12 @@
 package com.example.weatherforecastapp.contract
 
+import android.content.Context
 import com.example.weatherforecastapp.entity.WeatherObject
 import io.reactivex.Observable
 
 
 interface MainContract {
     interface Model{
-        fun getListOfWeather(): Observable<List<WeatherObject>>
+        fun getListOfWeather(currentLoc: String?): Observable<List<WeatherObject>>
     }
 }

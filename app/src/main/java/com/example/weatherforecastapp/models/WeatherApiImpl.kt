@@ -14,14 +14,16 @@ object WeatherApiImpl:MainContract.Model {
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .baseUrl("https://api.openweathermap.org/")
+        .baseUrl("https://api.openweathermap.org/data/2.5/")
         .build()
 
     private val weatherService = retrofit.create(WeatherApi::class.java)
 
 
-    override fun getListOfWeather(): Observable<List<WeatherObject>> {
-        return   weatherService.getListOfWeather()
+    override fun getListOfWeather(currentLoc: String?): Observable<List<WeatherObject>> {
+
+
+        return   weatherService.getListOfWeather(currentLoc,"metric","e486af048708fe62da581f394970a86c")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .flatMapIterable { apiData -> apiData.weatherMeta }
