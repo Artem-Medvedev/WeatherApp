@@ -23,8 +23,8 @@ class WeatherListAdapter: RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() 
         var weatherImageView: ImageView? = null
 
         init {
-            timeTextView = itemView.findViewById(R.id.timeTextView)
-            descTextView = itemView.findViewById(R.id.mainTextView)
+            timeTextView = itemView.findViewById(R.id.mainTextView)
+            descTextView = itemView.findViewById(R.id.timeTextView)
             tempTextView = itemView.findViewById(R.id.tempTextView)
             weatherImageView = itemView.findViewById(R.id.iconImageView)
         }

@@ -2,6 +2,7 @@ package com.example.weatherforecastapp.views
 
 import android.Manifest
 import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -20,6 +21,7 @@ import com.example.weatherforecastapp.models.WeatherApiImpl
 import com.google.android.gms.location.LocationServices
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
+import kotlinx.android.synthetic.main.today_fragment.*
 import java.util.*
 
 class TodayFragment:Fragment() {
@@ -85,6 +87,23 @@ class TodayFragment:Fragment() {
         }
 
 
+        val yourResults="""Today's weather is:
+            binding.cityNameTextView.text+
+            Temperature: ${binding.mainTempTextView.text}
+            Wind speed: ${binding.speedTextView.text}
+            Pressure:${binding.pressureTextView.text}
+            Humidity${binding.humidityTextView.text}
+             """.trimMargin()
+        binding.imageButton.load(R.drawable.ic_share_black_24dp)
+        binding.imageButton.setOnClickListener {
+            val sendIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                type = "plain/text"
+                putExtra(Intent.EXTRA_SUBJECT,"Your Weather")
+                putExtra(Intent.EXTRA_TEXT, yourResults)
+            }
+            startActivity(sendIntent)
+        }
 
         return root
 
