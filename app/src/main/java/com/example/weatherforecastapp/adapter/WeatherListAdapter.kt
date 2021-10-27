@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.entity.WeatherObject
 import com.example.weatherforecastapp.views.MainActivity
@@ -40,7 +41,15 @@ class WeatherListAdapter: RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() 
         holder.timeTextView?.text = currentItem.date
         holder.descTextView?.text = currentItem.desc
         holder.tempTextView?.text = currentItem.temp.toInt().toString()+"\u2103"
-        holder.weatherImageView?.setImageResource(R.drawable.ic_light_mode_black_24dp)
+        if(currentItem.desc=="Clear"){
+            holder.weatherImageView?.load(R.drawable.ic_light_mode_black_24dp)
+        }
+        if(currentItem.desc=="Clouds"){
+            holder.weatherImageView?.load(R.drawable.cloud)
+        }
+        if(currentItem.desc=="Rain"||currentItem.desc=="Thunderstorm"){
+            holder.weatherImageView?.load(R.drawable.raining)
+        }
 
     }
 
