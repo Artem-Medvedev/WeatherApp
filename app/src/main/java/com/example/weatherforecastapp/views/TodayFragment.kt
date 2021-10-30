@@ -56,11 +56,12 @@ class TodayFragment:Fragment() {
                         }
 
                         override fun onNext(t: List<WeatherObject>) {
-                            binding.cityNameTextView.text = currentLoc + ", "+ t[0].desc
+                            binding.cityNameTextView.text = currentLoc
+                            binding.weatherDescTextView.text = t[0].desc.toString()
                             binding.mainTempTextView.text = t[0].temp.toInt().toString() + "\u2103"
-                            binding.humidityTextView.text = t[0].humidity.toInt().toString() + "\u0025"
-                            binding.speedTextView.text = t[0].speed.toInt().toString() + "km/h"
-                            binding.pressureTextView.text = t[0].pressure.toInt().toString() + "mm"
+                            binding.humidityTextView.text = t[0].humidity.toInt().toString()
+                            binding.speedTextView.text = t[0].speed.toInt().toString()
+                            binding.pressureTextView.text = t[0].pressure.toInt().toString()
 
                             if(t[0].desc=="Clear"){
                                 binding.imageView.load(R.drawable.ic_light_mode_black_24dp)

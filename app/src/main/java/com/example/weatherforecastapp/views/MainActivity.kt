@@ -7,6 +7,7 @@ import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.weatherforecastapp.R
@@ -23,18 +24,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        window.statusBarColor = ContextCompat.getColor(this,R.color.white)
 
-        if(ActivityCompat.checkSelfPermission((this)
-                ,ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
-                val geoCoder = Geocoder(this)
-                loc = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-            }
-        } else{
-            ActivityCompat.requestPermissions(this, arrayOf(ACCESS_FINE_LOCATION),44)
-
-        }
 
         val navView: BottomNavigationView = binding.navView
 
