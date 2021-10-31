@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.databinding.TodayFragmentBinding
-import com.example.weatherforecastapp.entity.WeatherObject
 import com.example.weatherforecastapp.viewmodel.WeatherFactory
 import com.example.weatherforecastapp.viewmodel.WeatherViewModel
 import com.google.android.gms.location.LocationServices
@@ -61,10 +60,18 @@ class TodayFragment:Fragment() {
                     binding.pressureTextView.text = it[0].pressure.toInt().toString()
 
                     if(it[0].desc=="Clear"){
-                        binding.imageView.load(R.drawable.ic_light_mode_black_24dp)
+                        if(it[0].time.substring(0,2).toInt()>=20 || it[0].time.substring(0,2).toInt()<=3) {
+                            binding.imageView.load(R.drawable.moon__1_)
+                        } else {
+                            binding.imageView.load(R.drawable.sun__2_)
+                        }
                     }
                     if(it[0].desc=="Clouds"){
-                        binding.imageView.load(R.drawable.cloud)
+                        if(it[0].time.substring(0,2).toInt()>=20 || it[0].time.substring(0,2).toInt()<=3) {
+                            binding.imageView.load(R.drawable.moon)
+                        } else {
+                            binding.imageView.load(R.drawable.cloud)
+                        }
                     }
                     if(it[0].desc=="Rain"||it[0].desc=="Thunderstorm"){
                         binding.imageView.load(R.drawable.raining)
@@ -74,9 +81,9 @@ class TodayFragment:Fragment() {
                     val yourResults="""Today's weather is:
                   ${binding.cityNameTextView.text}
                    Temperature: ${binding.mainTempTextView.text}
-                   Wind speed: ${binding.speedTextView.text}
-                   Pressure: ${binding.pressureTextView.text}
-                   Humidity: ${binding.humidityTextView.text}
+                   Wind speed: ${binding.speedTextView.text} Km/h
+                   Pressure: ${binding.pressureTextView.text} mm
+                   Humidity: ${binding.humidityTextView.text} %
                     """.trimMargin()
                     binding.imageButton.setOnClickListener {
                         val sendIntent = Intent().apply {

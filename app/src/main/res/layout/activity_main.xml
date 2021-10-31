@@ -14,7 +14,8 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         app:itemRippleColor="@color/light_blue"
-        app:itemIconTint="@color/grey"
+        app:itemIconTint="@drawable/icons_color"
+        app:itemTextColor="@drawable/icons_color"
         android:background="?android:attr/windowBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,8 +32,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

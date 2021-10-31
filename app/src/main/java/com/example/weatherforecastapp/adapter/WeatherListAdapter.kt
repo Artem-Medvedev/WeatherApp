@@ -38,14 +38,22 @@ class WeatherListAdapter: RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() 
         val  currentItem = weatherListAdapter[position]
 
 
-        holder.timeTextView?.text = currentItem.date
+        holder.timeTextView?.text = currentItem.time.substring(0,5)
         holder.descTextView?.text = currentItem.desc
         holder.tempTextView?.text = currentItem.temp.toInt().toString()+"\u2103"
         if(currentItem.desc=="Clear"){
-            holder.weatherImageView?.load(R.drawable.ic_light_mode_black_24dp)
+            if(currentItem.time.substring(0,2).toInt()>=20 || currentItem.time.substring(0,2).toInt()<=3) {
+                holder.weatherImageView?.load(R.drawable.moon__1_)
+            } else {
+                holder.weatherImageView?.load(R.drawable.sun__2_)
+            }
         }
         if(currentItem.desc=="Clouds"){
-            holder.weatherImageView?.load(R.drawable.cloud)
+            if(currentItem.time.substring(0,2).toInt()>=20 || currentItem.time.substring(0,2).toInt()<=3) {
+                holder.weatherImageView?.load(R.drawable.moon)
+            } else {
+                holder.weatherImageView?.load(R.drawable.cloud)
+            }
         }
         if(currentItem.desc=="Rain"||currentItem.desc=="Thunderstorm"){
             holder.weatherImageView?.load(R.drawable.raining)

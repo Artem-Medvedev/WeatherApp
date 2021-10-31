@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="31dp"
         android:fontFamily="@font/productsans"
         android:text="Today"
@@ -20,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:cardBackgroundColor="@color/darker_white"
