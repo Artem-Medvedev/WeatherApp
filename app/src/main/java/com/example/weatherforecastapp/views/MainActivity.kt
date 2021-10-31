@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.weatherforecastapp.navigation.KeepStateNavigator
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -18,9 +18,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.statusBarColor = ContextCompat.getColor(this,R.color.light_blue)
 
-       val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        navView.setupWithNavController(navController)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)!!
+
+        val navigator = KeepStateNavigator(this,navHostFragment.childFragmentManager, R.id.nav_host_fragment_activity_main)
+        navController.navigatorProvider.addNavigator(navigator)
+        navController.setGraph(R.navigation.nav_graph)
+       binding.navView.setupWithNavController(navController)
     }
 
 }

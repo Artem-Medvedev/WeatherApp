@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.databinding.TodayFragmentBinding
+import com.example.weatherforecastapp.entity.WeatherObject
 import com.example.weatherforecastapp.viewmodel.WeatherFactory
 import com.example.weatherforecastapp.viewmodel.WeatherViewModel
 import com.google.android.gms.location.LocationServices
@@ -68,6 +69,7 @@ class TodayFragment:Fragment() {
                     if(it[0].desc=="Rain"||it[0].desc=="Thunderstorm"){
                         binding.imageView.load(R.drawable.raining)
                     }
+
 
                     val yourResults="""Today's weather is:
                   ${binding.cityNameTextView.text}
