@@ -1,7 +1,6 @@
 package com.example.weatherforecastapp.views
 
 import android.Manifest
-import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -12,71 +11,70 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.weatherforecastapp.R
-import com.example.weatherforecastapp.adapter.WeatherListAdapter
-import com.example.weatherforecastapp.entity.WeatherObject
-import com.example.weatherforecastapp.models.WeatherApiImpl
+import com.example.weatherforecastapp.adapter.ParentAdapter
+import com.example.weatherforecastapp.databinding.ForecastFragmentBinding
+import com.example.weatherforecastapp.viewmodel.WeatherFactory
+import com.example.weatherforecastapp.viewmodel.WeatherViewModel
 import com.google.android.gms.location.LocationServices
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
-import kotlinx.android.synthetic.main.forecast_fragment.*
 import java.util.*
 
 class ForecastFragment: Fragment(){
 
     private   var currentLoc: String? = null
+    private lateinit var weatherViewModel: WeatherViewModel
+    private var _binding: ForecastFragmentBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.forecast_fragment, container, false)
+    ): View {
 
-    }
+        _binding = ForecastFragmentBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        val adapter = ParentAdapter()
+        binding.listRecyclerView.adapter = adapter
+        binding.listRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val adapter = WeatherListAdapter()
-        listRecyclerView.adapter = adapter
-        listRecyclerView.layoutManager = LinearLayoutManager(activity as MainActivity)
-
-
-        val api = WeatherApiImpl
         if(ActivityCompat.checkSelfPermission((activity as MainActivity)
                 , Manifest.permission.ACCESS_FINE_LOCATION
-            )== PackageManager.PERMISSION_GRANTED){
-            val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(activity as MainActivity)
+            )== PackageManager.PERMISSION_GRANTED) {
+            val fusedLocationProviderClient =
+                LocationServices.getFusedLocationProviderClient(activity as MainActivity)
             var city: List<Address>
 
-                 fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
-                     val geoCoder = Geocoder(activity as MainActivity, Locale.ENGLISH)
-                     city = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-                     currentLoc = city.first().locality
-                     Log.d("First",city.first().locality)
-                     api.getListOfWeather(currentLoc)
-                         .subscribe(object : Observer<List<WeatherObject>> {
-                             override fun onSubscribe(d: Disposable) {
-                             }
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                val geoCoder = Geocoder(activity as MainActivity, Locale.ENGLISH)
+                city = geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+                currentLoc = city.first().locality
+                Log.d("First", city.first().locality)
 
-                             override fun onNext(t: List<WeatherObject>) {
-                                 adapter.setData(t)
-                             }
+                weatherViewModel = ViewModelProvider(this, WeatherFactory(currentLoc)).get(
+                    WeatherViewModel::class.java)
 
-                             override fun onError(e: Throwable) {
-                                 Log.e(ContentValues.TAG,"onError: ",e)
-                             }
+                weatherViewModel.items.observe(viewLifecycleOwner, androidx.lifecycle.Observer{ weather ->
 
-                             override fun onComplete() {
-                             }
-                         })
-                 }
+                    val weatherFor = weather.groupBy { it.date }
+                    Log.d("First", weatherFor.toString())
 
-        } else{
-            ActivityCompat.requestPermissions(activity as MainActivity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),44)
+                    adapter.setData(weatherFor)
+
+
+                })
+            }
         }
+        return root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 
-    }
-    }
+
+}

@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface WeatherApi {
     @GET("forecast")
-    fun getListOfWeather(@Query("q")city:String?,
+    suspend fun getListOfWeather(@Query("q")city:String?,
                          @Query("units")units: String,
-                         @Query("appid")appid: String): Observable<ApiData>
+                         @Query("appid")appid: String):ApiData
 }
 
 

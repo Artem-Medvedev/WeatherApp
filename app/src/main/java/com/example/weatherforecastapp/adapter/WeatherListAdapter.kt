@@ -5,12 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.entity.WeatherObject
-import com.example.weatherforecastapp.views.MainActivity
 
 class WeatherListAdapter: RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() {
 
@@ -38,6 +36,8 @@ class WeatherListAdapter: RecyclerView.Adapter<WeatherListAdapter.ViewHolder>() 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val  currentItem = weatherListAdapter[position]
+
+
         holder.timeTextView?.text = currentItem.date
         holder.descTextView?.text = currentItem.desc
         holder.tempTextView?.text = currentItem.temp.toInt().toString()+"\u2103"
