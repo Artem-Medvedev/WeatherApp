@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="?colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,11 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="31dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/productsans"
         android:text="@string/today"
-        android:textColor="@color/grey"
+        android:textColor="?colorOnPrimary"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,11 +24,12 @@
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:cardBackgroundColor="@color/darker_white"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="?colorPrimaryVariant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/imageButton">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -49,13 +50,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/productsans"
-                tools:text="32C"
-                android:textColor="@color/grey"
+                android:textColor="?colorOnPrimary"
                 android:textSize="50sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                tools:text="32C" />
 
             <TextView
                 android:id="@+id/cityNameTextView"
@@ -63,12 +64,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/productsans"
-                tools:text="City"
-                android:textColor="@color/grey"
+                android:textColor="?colorOnPrimary"
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainTempTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/mainTempTextView"
+                tools:text="City" />
 
             <TextView
                 android:id="@+id/weatherDescTextView"
@@ -76,12 +77,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:fontFamily="@font/productsans"
-                tools:text="Sunny"
-                android:textColor="@color/grey"
+                android:textColor="?colorOnPrimary"
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cityNameTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/cityNameTextView"
+                tools:text="Sunny" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="0dp"
@@ -89,6 +90,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="100dp"
                 app:cardCornerRadius="20dp"
+                app:cardBackgroundColor="?colorSecondary"
                 app:cardElevation="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +117,7 @@
                         android:layout_marginBottom="33dp"
                         android:fontFamily="@font/productsans"
                         android:text="@string/wind_blow"
-                        android:textColor="@color/grey"
+                        android:textColor="?colorOnPrimary"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/icon_wind"
@@ -139,12 +141,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="27dp"
                         android:fontFamily="@font/productsans"
-                        tools:text="99"
                         android:textColor="@color/light_blue"
                         android:textSize="25sp"
                         app:layout_constraintEnd_toEndOf="@+id/icon_wind"
                         app:layout_constraintStart_toStartOf="@+id/icon_wind"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="99" />
 
                     <View
                         android:id="@+id/view1"
@@ -172,7 +174,7 @@
                         android:layout_marginBottom="33dp"
                         android:fontFamily="@font/productsans"
                         android:text="@string/pressure"
-                        android:textColor="@color/grey"
+                        android:textColor="?colorOnPrimary"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/pressureImageView"
@@ -184,12 +186,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="27dp"
                         android:fontFamily="@font/productsans"
-                        tools:text="99"
                         android:textColor="@color/light_blue"
                         android:textSize="25sp"
                         app:layout_constraintEnd_toEndOf="@+id/pressureImageView"
                         app:layout_constraintStart_toStartOf="@+id/pressureImageView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="99" />
 
                     <ImageView
                         android:id="@+id/humidityImageView"
@@ -208,7 +210,7 @@
                         android:layout_marginBottom="33dp"
                         android:fontFamily="@font/productsans"
                         android:text="@string/humidity"
-                        android:textColor="@color/grey"
+                        android:textColor="?colorOnPrimary"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/humidityImageView"
@@ -220,12 +222,12 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="27dp"
                         android:fontFamily="@font/productsans"
-                        tools:text="99"
                         android:textColor="@color/light_blue"
                         android:textSize="25sp"
                         app:layout_constraintEnd_toEndOf="@+id/humidityImageView"
                         app:layout_constraintStart_toStartOf="@+id/humidityImageView"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="99" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -242,11 +244,25 @@
         android:id="@+id/imageButton"
         android:layout_width="73dp"
         android:layout_height="58dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="17dp"
-        android:background="@color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="?colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_share_black_24dp" />
+        app:srcCompat="@drawable/ic_share_black_24dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="73dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        android:background="?colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_settings_black_24dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

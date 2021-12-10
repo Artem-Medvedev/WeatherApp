@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherforecastapp.R
 import com.example.weatherforecastapp.entity.WeatherObject
 
-class ParentAdapter: RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
+class ParentAdapter : RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
 
     private var weatherList = mapOf<String, List<WeatherObject>>()
 
@@ -24,7 +24,7 @@ class ParentAdapter: RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.main_list_item,parent,false)
+            LayoutInflater.from(parent.context).inflate(R.layout.main_list_item, parent, false)
         )
     }
 

@@ -4,23 +4,14 @@ import com.example.weatherforecastapp.entity.WeatherObject
 import com.example.weatherforecastapp.network.WeatherApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
-object WeatherApiImpl {
-    private val retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .baseUrl("https://api.openweathermap.org/data/2.5/")
-        .build()
-
-    private val weatherService = retrofit.create(WeatherApi::class.java)
-
-
+@Singleton
+class WeatherRemoteData @Inject constructor(private val weatherService: WeatherApi){
     suspend fun getListOfWeather(currentLoc: String?): List<WeatherObject> {
 
         val dtfInput = DateTimeFormatter.ofPattern("u-M-d", Locale.ENGLISH)
@@ -45,4 +36,3 @@ object WeatherApiImpl {
         }
     }
 }
-
